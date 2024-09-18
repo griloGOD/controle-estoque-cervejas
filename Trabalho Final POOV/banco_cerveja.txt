@@ -1,0 +1,36 @@
+create database fabrica;
+create table cliente(
+cpf varchar(11),
+nome varchar(30),
+telefone varchar(30),
+endereco varchar(50),
+Insta varchar(30),
+primary key(cpf)
+);
+
+create table cerveja(
+idBeer varchar(30),
+descricao varchar(30),
+valor double,
+primary key (idBeer)
+);
+
+create table pedidos(
+id_pedido varchar(30),
+fk_cpf_cliente varchar(11),
+data_pedido timestamp default current_timestamp,
+primary key(id_pedido),
+foreign key(fk_cpf_cliente) references cliente(cpf)
+);
+
+
+
+create table cerveja_pedido(
+id_cerveja_pedido varchar(30),
+fk_id_cerveja varchar(30),
+fk_id_pedido varchar(30),
+quantidade integer not null,
+primary key(id_cerveja_pedido),
+foreign key(fk_id_pedido) references pedidos(id_pedido),
+foreign key(fk_id_cerveja) references cerveja(idBeer)
+);
